@@ -5,6 +5,7 @@ import com.br.alansiq.todoapp.dto.response.PessoaDTO;
 import com.br.alansiq.todoapp.model.Pessoa;
 import com.br.alansiq.todoapp.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,24 +17,32 @@ public class HelloService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    public PessoaDTO hello(Long id) {
-//        AddressDTO novoEndereco = new AddressDTO("Jose Timoteo da Silva", "06172220", 120);
-//        List<String> hobbies = new ArrayList<>();
-//        hobbies.add("CODAR UM JAVA MEU PARSA");
-//        hobbies.add("JOGAR UM CS");
-//        hobbies.add("cair de moto");
-//        PessoaDTO novaPessoa = new PessoaDTO("Alan", "433", 23, novoEndereco, hobbies);
+    public ResponseEntity<PessoaDTO> hello(Long id) {
 
         Optional<Pessoa> novaPessoa = this.pessoaRepository.findById(id);
 
         if (novaPessoa.isPresent()) {
             Pessoa p = novaPessoa.get();
-            // parsear Pessoa (model) em PessoaDTO
-            //
+            // parse model Pessoa em PessoaDTO
+
+            AddressDTO parsedAddress = new AddressDTO(
+                    p.getAddress().getStreetName(),
+                    p.getAddress().getZipCode(),
+                    p.getAddress().getNumber()
+            );
+
+            PessoaDTO parsedPessoa = new PessoaDTO(
+                    p.getNome(),
+                    p.getCpf(),
+                    p.getIdade(),
+                    parsedAddress,
+                    p.getHobbies()
+            );
+
+            return ResponseEntity.ok().body(parsedPessoa);
         }
 
-
-//        return PessoaDTOParseada;
+        return ResponseEntity.notFound().build();
 
     }
 }

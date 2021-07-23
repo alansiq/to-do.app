@@ -4,19 +4,20 @@ import com.br.alansiq.todoapp.dto.response.AddressDTO;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.Column;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 public class Pessoa {
     @Id
     private Long id;
-    //@Column()
+    @Column(name = "nome")
     private String nome;
+    @Column(name = "cpf")
     private String cpf;
+    @Column(name = "idade")
     private int idade;
 
 
-
-    // dados complexos
     private Address address;
     private List<String> hobbies;
 

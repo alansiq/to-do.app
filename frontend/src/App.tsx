@@ -1,8 +1,18 @@
 import Routes from './routes';
+import styled from 'styled-components';
 
-function App() {
+const Main = styled.main`
+
+  height: 100vh;
+  width: 100%;
+
+`
+
+const App = () => {
   return (
-    <Routes />
+    <Main>
+      <Routes />
+    </Main>
   );
 }
 

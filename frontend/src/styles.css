@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    min-height: 100vh;
+    background: #FAFAFA;
+
+    margin: 0 164px;
+}
+
+h1, h2, h3 {
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    color: #44465e;
+}
+
+p, span {
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    color: #80839F;
+}

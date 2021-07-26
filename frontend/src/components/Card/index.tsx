@@ -28,6 +28,12 @@ max-height: 148px;
 height: 148px;
 overflow: hidden;
 
+transition: all 0.2s;
+
+&:hover {
+    box-shadow: 0px 9px 18px -9px #585B76;
+}
+
 h4 {
     font-family: Roboto, sans-serif;
     color: #585B76;

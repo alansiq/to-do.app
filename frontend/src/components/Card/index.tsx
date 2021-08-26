@@ -28,21 +28,66 @@ max-height: 148px;
 height: 148px;
 overflow: hidden;
 
+user-select: none;
+cursor: pointer;
+
 transition: all 0.2s;
 
 &:hover {
     box-shadow: 0px 9px 18px -9px #585B76;
 }
 
-h4 {
+.cardTitle {
+    display: flex;
+    gap: 4px;
+    align-items: baseline;
+
+    span {
+        font-size: 16px;
+        color: #D0D0D0;
+    }
+
+    h4 {
     font-family: Roboto, sans-serif;
     color: #585B76;
     font-weight: 400;
     font-size: 18px !important; 
+    }
+
 }
+
+
 
 p {
     font-size: 16px;
+    width: 100%;
+    height: 100%;
+
+    cursor: text;
+
+}
+
+[contenteditable='true'] {
+    padding: 4px;
+    outline: none;
+    position: relative;
+
+    &:focus::after {
+
+        content: '';
+        position: absolute;
+
+        height: 100%;
+        width: 100%;
+
+        top: 0;
+        left: 0;
+
+        background: rgba(46, 202, 241, 0.1);
+        pointer-events: none;
+
+        cursor: text;
+    }
 }
 
 `
@@ -69,11 +114,13 @@ const Card: React.FC<CardTypes> = ({ cardInfo }) => {
 
     return (
         <CardContainer>
-            <h4>{cardInfo.id} {cardInfo.title}</h4>
+            <div className="cardTitle">
+                <span>{cardInfo.id}</span><h4 contentEditable>{cardInfo.title}</h4>
+            </div>
             <TagContainer>
-                {cardInfo.tags.map(t => (<small key={t}>{t}</small>))}
+                {cardInfo.tags.map(t => (<small contentEditable key={t}>{t}</small>))}
             </TagContainer>
-            <p>{cardInfo.description}</p>
+            <p contentEditable>{cardInfo.description}</p>
         </CardContainer>
     )
 }

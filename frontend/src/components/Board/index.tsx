@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Column from '../../components/Column';
 import Card from '../../components/Card';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 
 const Container = styled.div`
@@ -41,7 +40,6 @@ const Board: React.FC<DataInterface> = (props) => {
         <>
 
             <Container>
-                <DragDropContext onDragEnd={() => console.log("Drag ended")} >
                     {props.data.boardColumns.map(status =>
                             <Column key={status} title={status}>
                                 {FilterCards(status, props).map(c => (
@@ -49,7 +47,6 @@ const Board: React.FC<DataInterface> = (props) => {
                                 ))}
                             </Column>
                     )}
-                </DragDropContext>
             </Container>
 
 
